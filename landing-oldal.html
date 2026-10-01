@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acélvázas Otthon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: bal oldali erős főcím + jobb oldali ház-rajz, alatta egyoszlopos, jól tagolt szekciók fehér alapon */
+:root {
+  --bg: #ffffff;
+  --peach: #FEBE98;
+  --peach-soft: #FFF3EA;
+  --brown: #915856;
+  --brown-deep: #5A3533;
+  --ink: #3B2624;
+  --muted: #7B615F;
+  --line: #F0DDD2;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  padding-inline: 20px; padding-block: 0;
+}
+.wrap { max-width: 1080px; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--font-display); color: var(--brown-deep); line-height: 1.1; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--brown); outline-offset: 3px; }
+
+.label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown); }
+
+/* nav */
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; flex-wrap: wrap; }
+.logo { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--brown-deep); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.logo i { width: 14px; height: 14px; background: var(--peach); border: 3px solid var(--brown); display: inline-block; }
+.nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; font-weight: 500; font-size: 0.95rem; }
+.nav a { text-decoration: none; }
+.nav ul a:hover { color: var(--brown); text-decoration: underline; text-underline-offset: 4px; }
+
+.btn { display: inline-block; background: var(--brown); color: #fff; font-weight: 600; text-decoration: none; padding: 14px 26px; border-radius: 6px; border: 0; font-family: inherit; font-size: 1rem; cursor: pointer; }
+.btn:hover { background: var(--brown-deep); }
+.btn.alt { background: transparent; color: var(--brown-deep); box-shadow: inset 0 0 0 2px var(--peach); }
+.btn.alt:hover { background: var(--peach-soft); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; padding-block: 36px 56px; }
+.hero > * { min-width: 0; }
+.hero h1 { font-size: clamp(2.2rem, 6vw, 3.9rem); font-weight: 800; letter-spacing: -0.03em; margin-block: 14px 20px; }
+.hero h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--peach) 62%); }
+.hero p.lead { font-size: 1.15rem; max-width: 34em; color: var(--ink); }
+.hero .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.hero svg { width: 100%; height: auto; max-width: 100%; display: block; }
+
+/* facts */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; background: var(--peach); border-radius: 10px; }
+.facts div { padding: 22px 26px; border-left: 1px solid rgba(90,53,51,0.18); min-width: 0; }
+.facts div:first-child { border-left: 0; }
+.facts strong { display: block; font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; color: var(--brown-deep); line-height: 1.1; }
+.facts span { font-size: 0.95rem; color: var(--brown-deep); }
+
+section { padding-block: 72px 0; }
+.head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; max-width: 40em; }
+.head p { color: var(--muted); }
+
+/* szolgáltatások */
+.services { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.service { border-top: 4px solid var(--peach); background: var(--peach-soft); padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.service p { color: var(--ink); font-size: 0.98rem; }
+
+/* referenciák */
+.refs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.ref { min-width: 0; }
+.ref .pic { aspect-ratio: 4 / 3; max-width: 100%; border-radius: 8px; background: var(--brown); position: relative; overflow: hidden; }
+.ref .pic svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ref.b .pic { background: #B47470; }
+.ref.c .pic { background: #D99C7C; }
+.ref h3 { margin-top: 14px; }
+.ref .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; font-size: 0.9rem; color: var(--muted); }
+.ref blockquote { margin: 10px 0 0; padding: 0; font-size: 0.98rem; }
+.note { font-size: 0.85rem; color: var(--muted); margin-top: 16px; }
+
+/* árak */
+.prices { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; align-items: stretch; }
+.price { border: 2px solid var(--line); border-radius: 10px; padding: 26px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.price.main { border-color: var(--brown); box-shadow: 8px 8px 0 var(--peach); }
+.price .from { font-size: 0.85rem; color: var(--muted); }
+.price .amount { font-family: var(--font-display); font-size: 2.1rem; font-weight: 800; color: var(--brown-deep); line-height: 1; font-variant-numeric: tabular-nums; }
+.price .amount small { font-size: 0.95rem; font-weight: 500; color: var(--muted); }
+.price ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 0.97rem; }
+.price li { padding-left: 24px; position: relative; }
+.price li::before { content: ""; position: absolute; left: 2px; top: 0.5em; width: 10px; height: 6px; border-left: 2.5px solid var(--brown); border-bottom: 2.5px solid var(--brown); transform: rotate(-45deg); }
+.price .btn { margin-top: auto; text-align: center; }
+.price .tag { align-self: flex-start; background: var(--peach); color: var(--brown-deep); font-size: 0.78rem; font-weight: 600; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.04em; }
+
+/* kapcsolat + cég */
+.contact { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; }
+.contact > * { min-width: 0; }
+form { display: flex; flex-direction: column; gap: 14px; }
+label { font-size: 0.9rem; font-weight: 600; color: var(--brown-deep); display: flex; flex-direction: column; gap: 6px; }
+input, select, textarea { font: inherit; color: var(--ink); background: #fff; border: 2px solid var(--line); border-radius: 6px; padding: 12px 14px; width: 100%; }
+input:focus, select:focus, textarea:focus { border-color: var(--brown); outline: none; }
+textarea { min-height: 110px; resize: vertical; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.row > * { min-width: 0; }
+.ok { display: none; background: var(--peach-soft); border-left: 4px solid var(--brown); padding: 14px 16px; font-weight: 500; }
+.ok.show { display: block; }
+.company { background: var(--peach-soft); padding: 28px; border-radius: 10px; display: flex; flex-direction: column; gap: 18px; align-self: start; }
+.company dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; font-size: 0.97rem; }
+.company dt { color: var(--muted); }
+.company dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+
+footer { margin-top: 80px; border-top: 1px solid var(--line); padding-block: 26px 40px; font-size: 0.88rem; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 800px) {
+  .hero, .contact { grid-template-columns: 1fr; }
+  .hero svg { max-width: 420px; }
+  .facts div { border-left: 0; border-top: 1px solid rgba(90,53,51,0.18); }
+  .facts div:first-child { border-top: 0; }
+  section { padding-block-start: 56px; }
+}
+@media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+
+</head>
+<body>
+<div class="wrap">
+  <header class="nav">
+    <a class="logo" href="#top"><i></i>Cégnév</a>
+    <ul>
+      <li><a href="#szolgaltatasok">Szolgáltatások</a></li>
+      <li><a href="#referenciak">Referenciák</a></li>
+      <li><a href="#arak">Árak</a></li>
+      <li><a href="#kapcsolat">Kapcsolat</a></li>
+    </ul>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <span class="label">Acélvázas mobilházak és modulházak</span>
+        <h1>Már idén a saját otthonodban ébredhetsz. <em>Fix áron, 8–12 hét alatt.</em></h1>
+        <p class="lead">Gyárban készül, a telkedre szállítjuk és felállítjuk. Előre tudod, mennyibe kerül és mikor költözhetsz be.</p>
+        <div class="cta">
+          <a class="btn" href="#kapcsolat">Ingyenes árajánlat</a>
+          <a class="btn alt" href="#arak">Árak megtekintése</a>
+        </div>
+      </div>
+      <svg viewBox="0 0 420 340" role="img" aria-label="Acélvázas ház rajza">
+        <rect x="0" y="0" width="420" height="340" rx="14" fill="#FFF3EA"/>
+        <circle cx="330" cy="70" r="34" fill="#FEBE98"/>
+        <rect x="0" y="270" width="420" height="70" fill="#FEBE98" opacity="0.55"/>
+        <polygon points="60,150 210,60 360,150" fill="#915856"/>
+        <rect x="80" y="150" width="260" height="120" fill="#ffffff" stroke="#915856" stroke-width="5"/>
+        <g stroke="#FEBE98" stroke-width="4">
+          <line x1="145" y1="150" x2="145" y2="270"/><line x1="210" y1="150" x2="210" y2="270"/><line x1="275" y1="150" x2="275" y2="270"/>
+          <line x1="80" y1="210" x2="340" y2="210"/>
+        </g>
+        <rect x="222" y="172" width="42" height="98" fill="#915856"/>
+        <rect x="100" y="172" width="34" height="30" fill="#FFF3EA" stroke="#915856" stroke-width="3"/>
+        <rect x="286" y="172" width="34" height="30" fill="#FFF3EA" stroke="#915856" stroke-width="3"/>
+        <line x1="0" y1="270" x2="420" y2="270" stroke="#5A3533" stroke-width="4"/>
+      </svg>
+    </div>
+
+    <div class="facts">
+      <div><strong>8–12 hét</strong><span>gyártás a szerződéstől az átadásig</span></div>
+      <div><strong>Fix ár</strong><span>a szerződésben rögzített, nincs pótmunka-meglepetés</span></div>
+      <div><strong>Acélváz</strong><span>nem vetemedik, nem korhad, pontos gyári méret</span></div>
+    </div>
+
+    <section id="szolgaltatasok">
+      <div class="head">
+        <span class="label">Szolgáltatások</span>
+        <h2>Az első vázlattól a kulcsig, egy kézből</h2>
+        <p>Nem kell külön tervezőt, gyártót és szállítót keresned. Mi intézzük.</p>
+      </div>
+      <div class="services">
+        <div class="service"><h3>Tervezés</h3><p>Az alaprajzot a telkedhez és az igényeidhez igazítjuk. Kész típusok közül is választhatsz.</p></div>
+        <div class="service"><h3>Gyártás</h3><p>Acélvázas szerkezet, gyárban, ellenőrzött körülmények között. A gyártás közben megnézheted a házadat.</p></div>
+        <div class="service"><h3>Szállítás és telepítés</h3><p>Kamionnal szállítjuk, daruval helyezzük a telekre. A csatlakozásokhoz is segítünk.</p></div>
+        <div class="service"><h3>Kulcsrakész átadás</h3><p>Szigetelve, burkolva, szerelvényekkel. Igény szerint bútorozva is.</p></div>
+      </div>
+    </section>
+
+    <section id="referenciak">
+      <div class="head">
+        <span class="label">Referenciák</span>
+        <h2>Ezekbe már beköltöztek</h2>
+        <p>Valódi házak, valódi telkeken. Kérésre elérhetőséget is adunk a megrendelőkhöz.</p>
+      </div>
+      <div class="refs">
+        <article class="ref a">
+          <div class="pic"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><polygon points="70,140 200,70 330,140" fill="#FEBE98"/><rect x="90" y="140" width="220" height="100" fill="#fff"/><rect x="190" y="160" width="36" height="80" fill="#915856"/><rect x="0" y="240" width="400" height="60" fill="#5A3533" opacity="0.4"/></svg></div>
+          <h3>Nyaraló a Balatonnál</h3>
+          <div class="meta"><span>42 m²</span><span>9 hét</span><span>Balatonfüred</span></div>
+          <blockquote>„Tavasszal rendeltük, a nyár elején már itt nyaraltunk.”</blockquote>
+        </article>
+        <article class="ref b">
+          <div class="pic"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><polygon points="60,130 200,60 340,130" fill="#FEBE98"/><rect x="80" y="130" width="240" height="110" fill="#fff"/><rect x="100" y="155" width="60" height="85" fill="#915856"/><rect x="180" y="155" width="60" height="85" fill="#915856"/><rect x="260" y="155" width="40" height="85" fill="#915856"/><rect x="0" y="240" width="400" height="60" fill="#5A3533" opacity="0.4"/></svg></div>
+          <h3>Kiadó apartman, három egység</h3>
+          <div class="meta"><span>3 × 24 m²</span><span>11 hét</span><span>Szeged</span></div>
+          <blockquote>„Az első hónapban már foglalások jöttek.”</blockquote>
+        </article>
+        <article class="ref c">
+          <div class="pic"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><polygon points="50,140 200,60 350,140" fill="#915856"/><rect x="70" y="140" width="260" height="100" fill="#fff"/><rect x="210" y="165" width="40" height="75" fill="#FEBE98"/><rect x="100" y="165" width="70" height="40" fill="#FFF3EA" stroke="#915856" stroke-width="3"/><rect x="0" y="240" width="400" height="60" fill="#5A3533" opacity="0.4"/></svg></div>
+          <h3>Családi otthon</h3>
+          <div class="meta"><span>78 m²</span><span>12 hét</span><span>Kecskemét</span></div>
+          <blockquote>„Előre tudtuk az árat, és az is maradt.”</blockquote>
+        </article>
+      </div>
+      <p class="note">Mintatartalom. Cseréld valódi referenciákra és fotókra.</p>
+    </section>
+
+    <section id="arak">
+      <div class="head">
+        <span class="label">Árak</span>
+        <h2>Ennyibe kerül, nincs rejtett tétel</h2>
+        <p>Az ár a ház gyártását és szállítását tartalmazza. A pontos összeget a terved alapján adjuk meg.</p>
+      </div>
+      <div class="prices">
+        <div class="price">
+          <h3>Kompakt</h3>
+          <div class="from">20–30 m²</div>
+          <div class="amount">9,9 M Ft <small>+ ÁFA-tól</small></div>
+          <ul><li>Kerti iroda, vendégház, kis nyaraló</li><li>Acélvázas szerkezet, szigetelve</li><li>Gyártás: 6–8 hét</li></ul>
+          <a class="btn alt" href="#kapcsolat">Ajánlatot kérek</a>
+        </div>
+        <div class="price main">
+          <span class="tag">Legtöbben ezt választják</span>
+          <h3>Otthon</h3>
+          <div class="from">40–60 m²</div>
+          <div class="amount">17,9 M Ft <small>+ ÁFA-tól</small></div>
+          <ul><li>Nyaraló vagy állandó lakhatás</li><li>Konyha, fürdő, szerelvények</li><li>Gyártás: 8–10 hét</li><li>Szállítás és daruzás benne</li></ul>
+          <a class="btn" href="#kapcsolat">Ajánlatot kérek</a>
+        </div>
+        <div class="price">
+          <h3>Családi</h3>
+          <div class="from">70–100 m²</div>
+          <div class="amount">28,5 M Ft <small>+ ÁFA-tól</small></div>
+          <ul><li>Több modulból összeállítva</li><li>Egyedi alaprajz</li><li>Gyártás: 10–12 hét</li></ul>
+          <a class="btn alt" href="#kapcsolat">Ajánlatot kérek</a>
+        </div>
+      </div>
+      <p class="note">Minta árak. Az alapozás, a közmű-csatlakozás és az engedélyeztetés külön tétel. Cseréld a valós árakra.</p>
+    </section>
+
+    <section id="kapcsolat">
+      <div class="head">
+        <span class="label">Kapcsolat</span>
+        <h2>Kérj árajánlatot a saját telkedre</h2>
+        <p>Írd meg, mit szeretnél. Munkanapokon egy napon belül visszahívunk.</p>
+      </div>
+      <div class="contact">
+        <form id="quote" novalidate>
+          <div class="row">
+            <label for="name">Név<input id="name" name="name" autocomplete="name" required></label>
+            <label for="phone">Telefonszám<input id="phone" name="phone" type="tel" autocomplete="tel" required></label>
+          </div>
+          <label for="email">E-mail<input id="email" name="email" type="email" autocomplete="email"></label>
+          <label for="type">Mire kell a ház?
+            <select id="type" name="type">
+              <option>Nyaraló</option><option>Állandó lakhatás</option><option>Kiadásra, befektetésként</option><option>Iroda vagy vendégház</option>
+            </select>
+          </label>
+          <label for="plot">Van már telked?
+            <select id="plot" name="plot"><option>Igen, van</option><option>Még nincs</option></select>
+          </label>
+          <label for="msg">Üzenet<textarea id="msg" name="msg" placeholder="Méret, település, elképzelés. Bármi, ami segít."></textarea></label>
+          <button class="btn" type="submit">Árajánlatot kérek</button>
+          <div class="ok" id="ok" role="status">Köszönjük, megkaptuk. Hamarosan jelentkezünk.</div>
+        </form>
+
+        <aside class="company">
+          <h3>Céges adatok</h3>
+          <dl>
+            <dt>Cégnév</dt><dd>Cégnév Kft.</dd>
+            <dt>Székhely</dt><dd>0000 Város, Minta utca 1.</dd>
+            <dt>Adószám</dt><dd>00000000-0-00</dd>
+            <dt>Cégjegyzékszám</dt><dd>00-00-000000</dd>
+            <dt>Telefon</dt><dd>+36 00 000 0000</dd>
+            <dt>E-mail</dt><dd>info@cegnev.hu</dd>
+            <dt>Nyitvatartás</dt><dd>H–P 8:00–16:00</dd>
+          </dl>
+          <p class="note" style="margin:0">Minta adatok. Cseréld a cég valós adataira.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© Cégnév Kft.</span>
+    <span>Adatkezelési tájékoztató</span>
+  </footer>
+</div>
+
+<script>
+document.getElementById('quote').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var name = document.getElementById('name'), phone = document.getElementById('phone');
+  var ok = document.getElementById('ok');
+  if (!name.value.trim() || !phone.value.trim()) {
+    (name.value.trim() ? phone : name).focus();
+    return;
+  }
+  ok.classList.add('show');
+});
+</script>
+
+</body>
+</html>

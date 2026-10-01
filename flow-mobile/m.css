@@ -1,0 +1,121 @@
+/* Telefon-első folyamatábra-változatok. Alap: ../css/style.css */
+.mfv { background: #fff; }
+.mf { max-width: 480px; margin: 0 auto; padding-bottom: 40px; }
+.mf .nav { padding-block: 8px; }
+.mf .logo img { height: 40px; width: auto; }
+.mh { text-align: center; font-size: 2rem; font-weight: 800; margin: 6px 0 22px; letter-spacing: -.02em; }
+.mf img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.mf h3 { font-family: var(--font-display); }
+:where(.mf) ol { list-style: none; margin: 0; padding: 0; }
+
+/* M1: nagy kép + átfedő kártya + nyilas lépcső */
+.m1 li { position: relative; padding-bottom: 70px; }
+.m1 .ph { position: relative; aspect-ratio: 4 / 3.2; border-radius: 22px; overflow: hidden; }
+.m1 .n { position: absolute; top: 14px; left: 14px; width: 44px; height: 44px; border-radius: 50%; background: var(--brown-deep); color: var(--peach); font-family: var(--font-display); font-weight: 900; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; }
+.m1 .card { position: relative; margin: -38px 16px 0; background: #fff; border-radius: 16px; padding: 16px 18px; box-shadow: 0 14px 34px rgba(90,53,51,.2); border: 0; border-left: 6px solid var(--peach); }
+.m1 .card h3 { font-size: 1.35rem; }
+.m1 .card p { color: var(--muted); }
+.m1 li:not(:last-child)::before { content: ""; position: absolute; left: 50%; bottom: 6px; height: 64px; border-left: 3px dashed var(--peach); transform: translateX(-50%); }
+.m1 li:not(:last-child)::after { content: "\2193"; position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); width: 46px; height: 46px; border-radius: 50%; background: var(--peach); color: var(--ink); font-weight: 900; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+
+/* M2: húzható nagy kártyák */
+.m2wrap { margin-inline: -20px; }
+.m2 { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 20px 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.m2::-webkit-scrollbar { display: none; }
+.m2 li { flex: 0 0 82%; position: relative; aspect-ratio: 4 / 5.4; border-radius: 24px; overflow: hidden; scroll-snap-align: center; box-shadow: 0 14px 30px rgba(90,53,51,.25); }
+.m2 li::before { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(35,17,15,.92)); z-index: 1; }
+.m2 .ov { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px; color: #fff; z-index: 2; }
+.m2 .n { display: block; font-family: var(--font-display); font-weight: 900; font-size: 3.4rem; line-height: 1; color: var(--peach); }
+.m2 h3 { color: #fff; font-size: 1.7rem; }
+.m2 p { color: #eadbd4; }
+.m2 .next { position: absolute; top: 14px; right: 14px; z-index: 3; background: rgba(255,255,255,.92); color: var(--brown-deep); font-weight: 800; font-size: .8rem; padding: 7px 12px; border-radius: 99px; }
+.m2wrap .dots { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.m2wrap .dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); transition: all .25s; }
+.m2wrap .dots i.on { width: 28px; border-radius: 6px; background: var(--brown-deep); }
+.m2wrap .hint { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 8px; }
+
+/* M3: teljes képernyős, függőleges snap */
+.m3wrap { position: relative; }
+.m3 { height: 74vh; min-height: 470px; overflow-y: auto; scroll-snap-type: y mandatory; border-radius: 26px; scrollbar-width: none; }
+.m3::-webkit-scrollbar { display: none; }
+.m3 li { position: relative; height: 100%; scroll-snap-align: start; }
+.m3 li::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(35,17,15,.25), transparent 30%, rgba(35,17,15,.9)); z-index: 1; }
+.m3 .ov { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 22px 54px; color: #fff; z-index: 2; }
+.m3 .big { display: block; font-family: var(--font-display); font-weight: 900; font-size: 6rem; line-height: .9; color: transparent; -webkit-text-stroke: 3px var(--peach); }
+.m3 h3 { color: #fff; font-size: 2rem; margin-top: 4px; }
+.m3 p { font-size: 1.05rem; color: #eadbd4; }
+.m3 .dn { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 3; width: 40px; height: 40px; border-radius: 50%; background: var(--peach); color: var(--ink); font-weight: 900; display: flex; align-items: center; justify-content: center; animation: bob 1.4s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translate(-50%, 6px); } }
+.m3wrap .pill { position: absolute; top: 14px; right: 14px; z-index: 5; background: var(--peach); color: var(--ink); font-weight: 800; padding: 6px 12px; border-radius: 99px; font-size: .85rem; }
+
+/* M4: idővonal */
+.m4 { position: relative; padding-left: 58px; }
+.m4::before { content: ""; position: absolute; left: 22px; top: 6px; bottom: 6px; width: 5px; border-radius: 4px; background: linear-gradient(var(--peach), var(--brown)); }
+.m4 li { position: relative; margin-bottom: 30px; }
+.m4 .dot { position: absolute; left: -58px; top: 0; width: 50px; height: 50px; border-radius: 50%; background: var(--brown-deep); color: var(--peach); font-family: var(--font-display); font-weight: 900; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; border: 5px solid #fff; box-shadow: 0 4px 14px rgba(0,0,0,.2); }
+.m4 .card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 12px 30px rgba(90,53,51,.16); border: 0; padding: 0; gap: 0; }
+.m4 .ph { aspect-ratio: 16 / 11; }
+.m4 .tx { padding: 14px 16px 16px; }
+.m4 h3 { font-size: 1.35rem; } .m4 p { color: var(--muted); }
+.m4 li:not(:last-child)::after { content: "\25BE"; position: absolute; left: -34px; bottom: -26px; color: var(--brown); font-size: 1.3rem; }
+
+/* M5: polaroid */
+.m5 li { position: relative; margin-bottom: 64px; }
+.m5 .pol { width: 88%; background: #fff; padding: 12px 12px 16px; border-radius: 6px; box-shadow: 0 16px 34px rgba(60,30,28,.28); position: relative; }
+.m5 .pol::before { content: ""; position: absolute; top: -12px; left: 50%; width: 90px; height: 26px; background: rgba(254,190,152,.85); transform: translateX(-50%) rotate(-3deg); }
+.m5 li.l .pol { transform: rotate(-2deg); }
+.m5 li.r .pol { transform: rotate(2deg); margin-left: auto; }
+.m5 .pol img { aspect-ratio: 1 / 1; border-radius: 3px; }
+.m5 .cap { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+.m5 .cap b { width: 42px; height: 42px; flex: none; border-radius: 50%; background: var(--brown-deep); color: var(--peach); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.2rem; }
+.m5 h3 { font-size: 1.25rem; } .m5 p { color: var(--muted); font-size: .92rem; line-height: 1.3; }
+.m5 li:not(:last-child)::after { content: "\25BC"; position: absolute; bottom: -44px; color: var(--peach); font-size: 1.6rem; }
+.m5 li.l:not(:last-child)::after { right: 24%; } .m5 li.r:not(:last-child)::after { left: 24%; }
+.m5 li:not(:last-child)::before { content: ""; position: absolute; bottom: -34px; width: 90px; height: 40px; border: 3px dashed var(--peach); border-top: 0; }
+.m5 li.l:not(:last-child)::before { right: 14%; border-left: 0; border-radius: 0 0 50px 0; }
+.m5 li.r:not(:last-child)::before { left: 14%; border-right: 0; border-radius: 0 0 0 50px; }
+
+/* M6: szélről szélre */
+.m6 li { position: relative; margin-inline: -20px; aspect-ratio: 4 / 5; margin-bottom: 8px; }
+.m6 li::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(35,17,15,.2), transparent 30%, rgba(35,17,15,.88)); z-index: 1; }
+.m6 .ov { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 24px 34px; color: #fff; z-index: 2; }
+.m6 .big { display: block; font-family: var(--font-display); font-weight: 900; font-size: 5rem; line-height: .9; color: transparent; -webkit-text-stroke: 2.5px var(--peach); }
+.m6 h3 { color: #fff; font-size: 1.9rem; } .m6 p { color: #eadbd4; font-size: 1.05rem; }
+.m6 li:not(:last-child)::after { content: "\2193"; position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%); width: 52px; height: 52px; border-radius: 50%; background: var(--peach); color: var(--ink); font-weight: 900; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; border: 5px solid #fff; z-index: 4; box-shadow: 0 6px 16px rgba(0,0,0,.28); }
+
+/* M7: egy nagy kép + léptető */
+.m7 .stage { position: relative; aspect-ratio: 4 / 5; border-radius: 26px; overflow: hidden; box-shadow: 0 16px 36px rgba(90,53,51,.28); background: var(--peach-soft); }
+.m7 .sl { position: absolute; inset: 0; opacity: 0; transition: opacity .6s; }
+.m7 .sl.on { opacity: 1; }
+.m7 .sl::before { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 45%, rgba(35,17,15,.9)); z-index: 1; }
+.m7 .ov { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px; color: #fff; z-index: 2; }
+.m7 .big { display: block; font-family: var(--font-display); font-weight: 900; font-size: 5rem; line-height: .9; color: var(--peach); }
+.m7 h3 { color: #fff; font-size: 1.9rem; } .m7 p { color: #eadbd4; font-size: 1.05rem; }
+.m7 .ctl { display: flex; align-items: center; gap: 10px; margin-top: 18px; }
+.m7 .ctl button { flex: none; width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--brown-deep); background: #fff; font-size: 1.9rem; line-height: 1; color: var(--brown-deep); padding: 0 0 4px; }
+.m7 .st { flex: 1; display: flex; justify-content: space-between; position: relative; }
+.m7 .st::before { content: ""; position: absolute; left: 14px; right: 14px; top: 50%; height: 4px; background: var(--line); transform: translateY(-50%); }
+.m7 .st li { position: relative; width: 38px; height: 38px; border-radius: 50%; background: #fff; border: 3px solid var(--line); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--muted); transition: all .25s; }
+.m7 .st li.on { background: var(--brown-deep); color: var(--peach); border-color: var(--peach); transform: scale(1.18); }
+.m7 .st li.done { background: var(--peach); border-color: var(--peach); color: var(--ink); }
+
+/* M8: kanyargó út */
+.m8 { position: relative; }
+.m8 svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.m8 path { fill: none; stroke: var(--peach); stroke-width: 6; stroke-dasharray: 2 14; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.m8 ol { position: relative; }
+.m8 li { height: 210px; display: flex; align-items: center; gap: 14px; }
+.m8 li.r { flex-direction: row-reverse; text-align: right; }
+.m8 .c { position: relative; flex: 0 0 150px; height: 150px; border-radius: 50%; border: 6px solid #fff; box-shadow: 0 12px 28px rgba(90,53,51,.32); overflow: visible; }
+.m8 .c img { border-radius: 50%; }
+.m8 .c span { position: absolute; top: -4px; right: -4px; width: 40px; height: 40px; border-radius: 50%; background: var(--brown-deep); color: var(--peach); border: 3px solid #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; }
+.m8 li.r .c span { right: auto; left: -4px; }
+.m8 h3 { font-size: 1.35rem; } .m8 p { color: var(--muted); font-size: .95rem; line-height: 1.3; }
+
+/* galéria: valódi telefonméret */
+.mgal .phones { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; margin-block: 24px 60px; }
+.ph8 { margin: 0; width: 406px; }
+.ph8 .cap { display: block; text-decoration: none; color: var(--ink); font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+.ph8 .cap strong { color: var(--brown); margin-right: 6px; }
+.ph8 .bezel { border: 8px solid #231110; border-radius: 34px; overflow: hidden; background: #fff; height: 800px; }
+.ph8 iframe { width: 390px; height: 100%; border: 0; display: block; }

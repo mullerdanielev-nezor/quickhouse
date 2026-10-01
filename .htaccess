@@ -1,0 +1,20 @@
+# Egyedi 404-es oldal
+ErrorDocument 404 /404.html
+
+# A korábbi (WordPress és aloldalas) címek átirányítása a főoldalra
+RewriteEngine On
+RewriteRule ^(rolunk|arak|kapcsolat|egyedi-lakohaz|mobilhaz|konnyuszerkezeteshaz|kontenerhaz|kohaz|csarnokok|iroda-kontener|bufe-kontener|szauna-haz|vizesblokk-wc-kontener)(\.html)?/?$ / [R=301,L]
+
+# HTTPS kényszerítése
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Gyorsítótárazás
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
