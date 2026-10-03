@@ -782,3 +782,8 @@ section > .head h2 { text-decoration: underline; text-decoration-color: var(--pe
   section > .head h2 { line-height: 1.22; text-underline-offset: .2em; }
   #kalkulator .head h2 { line-height: 1.3; }
 }
+
+/* szolid CTA: csak egy gomb, szekció nélkül */
+.mcta { all: unset; display: block; text-align: center; margin-top: 28px; }
+.mcta .btn { padding: 12px 28px; min-height: 0; font-size: .98rem; }
+@media (max-width: 860px) { .mcta .btn { width: 100%; max-width: 340px; } }
