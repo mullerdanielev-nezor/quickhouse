@@ -816,6 +816,33 @@ section > .head h2 { text-decoration: underline; text-decoration-color: var(--pe
 .mq-track { animation-duration: 30s; }
 @media (max-width: 860px) { .mq-track { animation-duration: 24s; } }
 
+/* ===== lábléc: mobil-első, szép és jól tappintható ===== */
+footer.ft { margin-top: 88px; border-top: 0; padding: 0 0 28px; color: var(--ink); font-size: .95rem; display: grid; grid-template-columns: 1.1fr 1.3fr 1fr; grid-template-areas: "top contact co" "legal legal legal" "copy copy copy"; gap: 28px 36px; align-items: start; position: relative; padding-top: 44px; }
+footer.ft::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--peach), var(--brown)); }
+.ft-top { grid-area: top; display: flex; flex-direction: column; gap: 12px; }
+.ft-logo img { height: 56px; width: auto; display: block; }
+.ft-top p { font-family: var(--font-display); font-weight: 800; color: var(--brown-deep); font-size: 1.1rem; line-height: 1.3; }
+.ft-contact { grid-area: contact; display: flex; flex-direction: column; gap: 10px; }
+.ft-btn { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 14px; background: var(--peach-soft); text-decoration: none; color: var(--brown-deep); font-weight: 700; font-size: 1.05rem; min-height: 60px; border: 2px solid transparent; transition: border-color .2s, background .2s; overflow-wrap: anywhere; }
+.ft-btn:hover, .ft-btn:active { border-color: var(--peach); background: #fff; }
+.ft-btn .ic { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--brown-deep); color: var(--peach); display: flex; align-items: center; justify-content: center; }
+.ft-btn .tx { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.ft-btn small { font-weight: 600; font-size: .78rem; color: var(--muted); letter-spacing: .02em; }
+.ft-co { grid-area: co; display: flex; flex-direction: column; gap: 4px; color: var(--muted); line-height: 1.5; }
+.ft-co strong { color: var(--brown-deep); font-size: 1rem; }
+.ft-legal { grid-area: legal; display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 22px; border-top: 1px solid var(--line); }
+.ft-legal a, .ft-legal button { color: var(--ink); text-decoration: none; background: none; border: 0; padding: 4px 0; font: inherit; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; }
+.ft-legal a:hover, .ft-legal button:hover { border-bottom-color: var(--peach); }
+.ft-copy { grid-area: copy; margin: 0; color: var(--muted); font-size: .85rem; }
+@media (max-width: 860px) {
+  footer.ft { grid-template-columns: 1fr; grid-template-areas: "top" "contact" "co" "legal" "copy"; gap: 22px; margin-top: 64px; padding-top: 34px; text-align: left; }
+  .ft-top { align-items: center; text-align: center; }
+  .ft-logo img { height: 60px; }
+  .ft-co { text-align: center; padding: 16px; border-radius: 14px; border: 2px dashed var(--line); }
+  .ft-legal { justify-content: center; text-align: center; gap: 4px 20px; }
+  .ft-copy { text-align: center; padding-bottom: 6px; }
+}
+
 </style>
 
 </head>
@@ -844,22 +871,27 @@ section > .head h2 { text-decoration: underline; text-decoration-color: var(--pe
 </main>
 </div>
 <div class="wrap">
-<footer>
-  <div class="foot">
-    <div>
-      <h4>Quickhouse</h4>
-      <p>Design Beruházási és Dekorációs Kft.<br>1055 Budapest, Szent István körút 21. Fsz. 2. ajtó<br>Adószám: 32372531-2-41</p>
-    </div>
-    <div>
-      <h4>Elérhetőség</h4>
-      <p><a href="tel:+36203165454">+36 20 316 5454</a><br><a href="tel:+36708858046">+36 70 885 8046</a><br><a href="mailto:info@quickhouse.hu">info@quickhouse.hu</a></p>
-    </div>
-    <div>
-      <h4>Jogi</h4>
-      <ul><li><a href="/adatvedelem.html">Adatkezelési tájékoztató</a></li><li><a href="/suti-tajekoztato.html">Süti tájékoztató</a></li><li><button type="button" class="link" data-cc-open>Süti beállítások</button></li></ul>
-    </div>
+<footer class="ft">
+  <div class="ft-top">
+    <a class="ft-logo" href="/index.html#top" aria-label="Quickhouse – vissza az oldal tetejére"><img src="/images/quickhouse-logo.webp" alt="Quickhouse.hu" width="110" height="57"></a>
+    <p>Tervezünk. Gyártunk. Építünk.<br>Mindent egyetlen csapattal.</p>
   </div>
-  <div class="copy"><span>© 2026 Design Beruházási és Dekorációs Kft. – Quickhouse</span></div>
+  <div class="ft-contact">
+    <a class="ft-btn" href="tel:+36203165454"><span class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><span class="tx"><small>Kiss Kirsztián</small>+36 20 316 5454</span></a>
+    <a class="ft-btn" href="tel:+36708858046"><span class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><span class="tx"><small>Keller Tamás</small>+36 70 885 8046</span></a>
+    <a class="ft-btn" href="mailto:info@quickhouse.hu"><span class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span class="tx"><small>E-mail</small>info@quickhouse.hu</span></a>
+  </div>
+  <div class="ft-co">
+    <strong>Design Beruházási és Dekorációs Kft.</strong>
+    <span>1055 Budapest, Szent István körút 21. Fsz. 2. ajtó</span>
+    <span>Adószám: 32372531-2-41</span>
+  </div>
+  <nav class="ft-legal" aria-label="Jogi tájékoztatók">
+    <a href="/adatvedelem.html">Adatkezelési tájékoztató</a>
+    <a href="/suti-tajekoztato.html">Süti tájékoztató</a>
+    <button type="button" data-cc-open>Süti beállítások</button>
+  </nav>
+  <p class="ft-copy">© 2026 Design Beruházási és Dekorációs Kft. – Quickhouse</p>
 </footer>
 </div>
 <div class="mbar"><a class="btn alt" href="tel:+36203165454">Hívás</a><a class="btn" href="/index.html#ajanlatkeres">Ajánlatot kérek</a></div>
@@ -1001,7 +1033,7 @@ section > .head h2 { text-decoration: underline; text-decoration-color: var(--pe
       fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
         .then(function (d) {
-          if (d.ok) { form.reset(); tsf.value = Date.now(); say(d.message || 'Köszönjük, megkaptuk.', false); }
+          if (d.ok) { if (window.fbq) fbq('track', 'Lead'); form.reset(); tsf.value = Date.now(); say(d.message || 'Köszönjük, megkaptuk.', false); }
           else say(d.message || 'A küldés most nem sikerült. Kérjük, hívjon minket telefonon.', true);
         })
         .catch(function () { say('A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.', true); })
@@ -1160,6 +1192,22 @@ section > .head h2 { text-decoration: underline; text-decoration-color: var(--pe
   Array.prototype.forEach.call(document.querySelectorAll('[data-cc-open]'), function (el) {
     el.addEventListener('click', function (e) { e.preventDefault(); openBanner(true); });
   });
+
+  /* ---------- Meta Pixel: csak a „Marketing” süti-hozzájárulás után töltődik be ---------- */
+  var PIXEL_ID = '1419425487034774', pixelOn = false;
+  function loadPixel() {
+    if (pixelOn) return; pixelOn = true;
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+      t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL_ID); fbq('track', 'PageView');
+  }
+  function pixelCheck() { var c = window.qhConsent.current; if (c && c.marketing) loadPixel(); }
+  document.addEventListener('qh:consent', pixelCheck);
+  pixelCheck();
+
   if (!window.qhConsent.current) openBanner(false);
 })();
 

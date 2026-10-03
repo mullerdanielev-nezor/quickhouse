@@ -135,7 +135,7 @@
       fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
         .then(function (d) {
-          if (d.ok) { form.reset(); tsf.value = Date.now(); say(d.message || 'Köszönjük, megkaptuk.', false); }
+          if (d.ok) { if (window.fbq) fbq('track', 'Lead'); form.reset(); tsf.value = Date.now(); say(d.message || 'Köszönjük, megkaptuk.', false); }
           else say(d.message || 'A küldés most nem sikerült. Kérjük, hívjon minket telefonon.', true);
         })
         .catch(function () { say('A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.', true); })
@@ -294,5 +294,21 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-cc-open]'), function (el) {
     el.addEventListener('click', function (e) { e.preventDefault(); openBanner(true); });
   });
+
+  /* ---------- Meta Pixel: csak a „Marketing” süti-hozzájárulás után töltődik be ---------- */
+  var PIXEL_ID = '1419425487034774', pixelOn = false;
+  function loadPixel() {
+    if (pixelOn) return; pixelOn = true;
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+      t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL_ID); fbq('track', 'PageView');
+  }
+  function pixelCheck() { var c = window.qhConsent.current; if (c && c.marketing) loadPixel(); }
+  document.addEventListener('qh:consent', pixelCheck);
+  pixelCheck();
+
   if (!window.qhConsent.current) openBanner(false);
 })();

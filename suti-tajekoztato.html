@@ -46,9 +46,9 @@
 <tr><th>Kategória</th><th>Név</th><th>Cél</th><th>Érvényesség</th><th>Hozzájárulás</th></tr>
 <tr><td>Szükséges</td><td><code>qh_consent</code> (süti és helyi tároló)</td><td>Megjegyzi a süti-beállításaidat, hogy ne kérdezzük meg minden oldalbetöltéskor.</td><td>12 hónap</td><td>Nem szükséges (az oldal működéséhez kell)</td></tr>
 <tr><td>Statisztikai</td><td>–</td><td>Névtelen látogatottsági statisztika az oldal fejlesztéséhez.</td><td>–</td><td>Csak hozzájárulásoddal</td></tr>
-<tr><td>Marketing</td><td>–</td><td>Személyre szabott hirdetések, remarketing.</td><td>–</td><td>Csak hozzájárulásoddal</td></tr>
+<tr><td>Marketing</td><td><code>_fbp</code>, <code>_fbc</code> (Meta Pixel; domain: quickhouse.hu), valamint a Meta szervereivel való kapcsolat</td><td>Hirdetéseink hatékonyságának mérése, remarketing a Facebookon és az Instagramon. A Meta Pixel az oldalmegtekintést és az ajánlatkérés beküldését jelzi a Meta felé.</td><td>_fbp: 90 nap</td><td>Csak hozzájárulásoddal</td></tr>
 </table>
-<div class="box">Jelenleg az oldal statisztikai vagy marketing sütit nem helyez el. Ha a jövőben ilyen szolgáltatást (pl. látogatottság-mérést) kapcsolunk be, azt csak a megfelelő kategóriára adott hozzájárulásod után tesszük, és ezt a táblázatot frissítjük.</div>
+<div class="box"><strong>Meta Pixel.</strong> Ha a „Marketing” kategóriát elfogadod, az oldal betölti a Meta Platforms Ireland Ltd. (Facebook, Instagram) mérőkódját. Ez a böngésződ azonosítóját, az oldalmegtekintéseket és az ajánlatkérés beküldésének tényét továbbítja a Meta felé, amely az adatokat saját szabályzata szerint is kezelheti. Ha nem fogadod el, a kód nem töltődik be, és semmilyen adat nem megy a Meta felé. Statisztikai sütit jelenleg nem használunk. A hozzájárulást bármikor visszavonhatod az oldal alján a „Süti beállítások” hivatkozásra kattintva. Részletek: <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">a Meta adatkezelési tájékoztatója</a>.</div>
 <h2>Hogyan kezelheted a sütiket?</h2>
 <ul>
 <li>Az első látogatáskor megjelenő sávban kiválaszthatod, mit engedsz.</li>
@@ -61,22 +61,27 @@
 </main>
 </div>
 <div class="wrap">
-<footer>
-  <div class="foot">
-    <div>
-      <h4>Quickhouse</h4>
-      <p>Design Beruházási és Dekorációs Kft.<br>1055 Budapest, Szent István körút 21. Fsz. 2. ajtó<br>Adószám: 32372531-2-41</p>
-    </div>
-    <div>
-      <h4>Elérhetőség</h4>
-      <p><a href="tel:+36203165454">+36 20 316 5454</a><br><a href="tel:+36708858046">+36 70 885 8046</a><br><a href="mailto:info@quickhouse.hu">info@quickhouse.hu</a></p>
-    </div>
-    <div>
-      <h4>Jogi</h4>
-      <ul><li><a href="adatvedelem.html">Adatkezelési tájékoztató</a></li><li><a href="suti-tajekoztato.html">Süti tájékoztató</a></li><li><button type="button" class="link" data-cc-open>Süti beállítások</button></li></ul>
-    </div>
+<footer class="ft">
+  <div class="ft-top">
+    <a class="ft-logo" href="index.html#top" aria-label="Quickhouse – vissza az oldal tetejére"><img src="images/quickhouse-logo.webp" alt="Quickhouse.hu" width="110" height="57"></a>
+    <p>Tervezünk. Gyártunk. Építünk.<br>Mindent egyetlen csapattal.</p>
   </div>
-  <div class="copy"><span>© 2026 Design Beruházási és Dekorációs Kft. – Quickhouse</span></div>
+  <div class="ft-contact">
+    <a class="ft-btn" href="tel:+36203165454"><span class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><span class="tx"><small>Kiss Kirsztián</small>+36 20 316 5454</span></a>
+    <a class="ft-btn" href="tel:+36708858046"><span class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><span class="tx"><small>Keller Tamás</small>+36 70 885 8046</span></a>
+    <a class="ft-btn" href="mailto:info@quickhouse.hu"><span class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span class="tx"><small>E-mail</small>info@quickhouse.hu</span></a>
+  </div>
+  <div class="ft-co">
+    <strong>Design Beruházási és Dekorációs Kft.</strong>
+    <span>1055 Budapest, Szent István körút 21. Fsz. 2. ajtó</span>
+    <span>Adószám: 32372531-2-41</span>
+  </div>
+  <nav class="ft-legal" aria-label="Jogi tájékoztatók">
+    <a href="adatvedelem.html">Adatkezelési tájékoztató</a>
+    <a href="suti-tajekoztato.html">Süti tájékoztató</a>
+    <button type="button" data-cc-open>Süti beállítások</button>
+  </nav>
+  <p class="ft-copy">© 2026 Design Beruházási és Dekorációs Kft. – Quickhouse</p>
 </footer>
 </div>
 <div class="mbar"><a class="btn alt" href="tel:+36203165454">Hívás</a><a class="btn" href="index.html#ajanlatkeres">Ajánlatot kérek</a></div>
