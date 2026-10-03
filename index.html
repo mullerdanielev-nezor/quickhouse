@@ -53,7 +53,7 @@
   </div>
 </div>
 <section id="acelhaz">
-  <div class="vid soon"><img src="images/acelvaz-szerkezet-szereles.webp" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></div>
+  <div class="vid" aria-hidden="true"><video autoplay muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" preload="auto" tabindex="-1" poster="images/acelvaz-szerkezet-szereles.webp"><source src="videos/acelhaz.mp4" type="video/mp4"></video></div><p class="vid-note">*A videó MI-tartalom, szimplán a folyamat bemutatása és illusztrálása végett készült.</p>
   <p class="mcta"><a class="btn alt" href="#ajanlatkeres">Ajánlatot kérek</a></p>
 </section>
 <section id="kalkulator">
@@ -95,7 +95,10 @@
   <div class="head"><span class="sec-no">06</span><h2>Kérj ajánlatot</h2></div>
   <div class="contact">
     <div id="ajanlatkeres">
-      <form id="quote" action="kuldes.php" method="post" novalidate>
+      <form id="quote" action="https://formsubmit.co/mullerdanielev@gmail.com" method="post" novalidate>
+        <input type="hidden" name="_subject" value="Új ajánlatkérés a quickhouse.hu oldalról">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
         <div class="row">
           <label for="name">Név<input id="name" name="name" autocomplete="name" required maxlength="120"></label>
           <label for="phone">Telefonszám<input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="40"></label>
@@ -110,7 +113,7 @@
           </label>
         </div>
         <label for="msg">Üzenet<textarea id="msg" name="msg" maxlength="4000" placeholder="Méret, település, elképzelés." required></textarea></label>
-        <div class="hp" aria-hidden="true"><label>Ne töltse ki<input name="weboldal" tabindex="-1" autocomplete="off"></label></div>
+        <div class="hp" aria-hidden="true"><label>Ne töltse ki<input name="_honey" tabindex="-1" autocomplete="off"></label></div>
         <input type="hidden" name="ts" id="ts" value="">
         <label class="check" for="consent"><input id="consent" name="consent" type="checkbox" value="1" required><span>Elfogadom az <a href="adatvedelem.html" target="_blank" rel="noopener">Adatkezelési tájékoztatót</a>.</span></label>
         <p class="note">Minden mező kitöltése kötelező.</p>

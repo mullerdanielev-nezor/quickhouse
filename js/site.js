@@ -69,17 +69,15 @@
   });
 
 
-  /* ---------- videó: magától indul (némítva), ha látszik; megáll, ha kimegy a képből ---------- */
-  Array.prototype.forEach.call(document.querySelectorAll('video[data-autoplay]'), function (v) {
-    v.muted = true;
-    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if ('IntersectionObserver' in window && !reduce) {
-      new IntersectionObserver(function (en) {
-        en.forEach(function (x) { if (x.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); });
-      }, { threshold: 0.5 }).observe(v);
-    }
-    var b = v.parentNode.querySelector('.vsound');
-    if (b) b.addEventListener('click', function () { v.muted = !v.muted; b.setAttribute('aria-pressed', v.muted ? 'false' : 'true'); });
+  /* ---------- videó: állandóan fut (némítva, ismétlődik), nem vezérelhető ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.vid video'), function (v) {
+    v.muted = true; v.loop = true; v.removeAttribute('controls');
+    var go = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    v.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    v.addEventListener('pause', function () { if (!document.hidden) go(); });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) go(); });
+    ['touchstart', 'click', 'scroll'].forEach(function (ev) { window.addEventListener(ev, go, { once: true, passive: true }); });
+    go();
   });
 
   /* ---------- galéria ---------- */
@@ -132,11 +130,11 @@
       if (!window.fetch || !window.FormData) return; /* régi böngésző: hagyományos beküldés */
       e.preventDefault();
       btn.disabled = true; btn.textContent = 'Küldés…';
-      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
         .then(function (d) {
-          if (d.ok) { if (window.fbq) fbq('track', 'Lead'); form.reset(); tsf.value = Date.now(); say(d.message || 'Köszönjük, megkaptuk.', false); }
-          else say(d.message || 'A küldés most nem sikerült. Kérjük, hívjon minket telefonon.', true);
+          if (d.ok || d.success === true || d.success === 'true') { if (window.fbq) fbq('track', 'Lead'); form.reset(); tsf.value = Date.now(); say('Köszönjük, megkaptuk az ajánlatkérését. Hamarosan jelentkezünk.', false); }
+          else say('A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.', true);
         })
         .catch(function () { say('A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.', true); })
         .then(function () { btn.disabled = false; btn.textContent = 'Ajánlatot kérek'; });

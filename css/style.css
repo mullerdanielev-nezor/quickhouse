@@ -821,3 +821,10 @@ footer.ft::before { content: ""; position: absolute; top: 0; left: 0; right: 0; 
   .ft-legal { justify-content: center; text-align: center; gap: 4px 20px; }
   .ft-copy { text-align: center; padding-bottom: 6px; }
 }
+
+/* a videó állandóan fut, nem kattintható, nincs vezérlő */
+.vid video { pointer-events: none; -webkit-user-select: none; user-select: none; }
+.vid { cursor: default; }
+.vid video::-webkit-media-controls, .vid video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+
+.vid-note { max-width: 960px; margin: 12px auto 0; text-align: center; font-size: .85rem; color: var(--muted); font-style: italic; }
