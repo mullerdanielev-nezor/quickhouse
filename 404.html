@@ -759,6 +759,36 @@ html.noscroll { overflow: hidden; }
 .vsound .w { opacity: 0; }
 .vsound[aria-pressed="true"] .w { opacity: 1; }
 
+/* ===== szekciócímek: nagyok, designos kézzel húzott aláhúzással ===== */
+section > .head h2 { font-size: clamp(2.4rem, 8vw, 4.4rem); line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; }
+section > .head h2::after { content: ""; display: block; width: min(320px, 72%); height: 18px; margin: 16px auto 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 18' preserveAspectRatio='none'%3E%3Cpath d='M3 11 C45 3 90 16 140 8 S235 14 297 5' fill='none' stroke='%23FEBE98' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M40 15 C100 10 160 17 250 12' fill='none' stroke='%23915856' stroke-width='3' stroke-linecap='round' opacity='.85'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
+section > .head { gap: 12px; margin-bottom: 36px; }
+@media (max-width: 480px) { section > .head h2::after { height: 14px; margin-top: 12px; } }
+
+/* szekciócímek: a szöveg szélességéhez igazodó, vastag barack aláhúzás (az ecsetvonás helyett) */
+section > .head h2::after { content: none; display: none; }
+section > .head h2 { text-decoration: underline; text-decoration-color: var(--peach); text-decoration-thickness: .13em; text-underline-offset: .17em; text-decoration-skip-ink: none; }
+
+/* ===== ígéret-plakátok: nyilas, lapozható ===== */
+.pc.poster { background: none; border: 0; box-shadow: none; border-radius: 22px; overflow: hidden; }
+.pc.poster img { width: 100%; height: auto; display: block; border-radius: 22px; box-shadow: 0 14px 34px rgba(90,53,51,.22); }
+.promo .arr { top: 45%; }
+.swipe-hint { display: none; color: var(--muted); font-size: .9rem; }
+@media (max-width: 860px) {
+  .swipe-hint { display: block; }
+  .promo .pc { flex: 0 0 84%; }
+  .promo .arr { display: flex; width: 46px; height: 46px; font-size: 1.7rem; background: rgba(255,255,255,.95); box-shadow: 0 4px 14px rgba(0,0,0,.28); }
+  .promo .arr.prev { left: 8px; } .promo .arr.next { right: 8px; }
+}
+
+/* ===== lapozó nyilak: tiszta, SVG-s, egységes ===== */
+.arr, .promo .arr { width: 52px; height: 52px; padding: 0; font-size: 0; line-height: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--brown-deep); background: #fff; color: var(--brown-deep); box-shadow: 0 8px 22px rgba(35,17,15,.28); cursor: pointer; transition: background .2s, color .2s, transform .15s; }
+.arr svg { display: block; }
+.arr:hover { background: var(--brown-deep); color: var(--peach); }
+.arr:active { transform: translateY(-50%) scale(.94); }
+.arr.prev { left: 10px; } .arr.next { right: 10px; }
+@media (max-width: 860px) { .arr, .promo .arr { width: 46px; height: 46px; background: rgba(255,255,255,.96); } .arr svg { width: 20px; height: 20px; } }
+
 </style>
 
 </head>
@@ -771,7 +801,7 @@ html.noscroll { overflow: hidden; }
       <a class="btn nav-cta" href="/index.html#ajanlatkeres">Ajánlatkérés</a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="menu"><span class="bi"><i></i><i></i><i></i></span><span>Menü</span></button>
     </div>
-    <nav class="snav" id="menu" aria-label="Szekciók"><ol><li><a href="/index.html#acelhaz"><b>01</b><span>Miért acélház?</span></a></li><li><a href="/index.html#kalkulator"><b>02</b><span>Árkalkulátor</span></a></li><li><a href="/index.html#folyamat"><b>03</b><span>Így megy</span></a></li><li><a href="/index.html#miert"><b>04</b><span>Miért éri meg?</span></a></li><li><a href="/index.html#igeret"><b>05</b><span>Az ígéretünk</span></a></li><li><a href="/index.html#referenciak"><b>06</b><span>Referenciák</span></a></li><li><a href="/index.html#gyik"><b>07</b><span>Gyakori kérdések</span></a></li><li><a href="/index.html#kapcsolat"><b>08</b><span>Ajánlatkérés</span></a></li></ol></nav>
+    <nav class="snav" id="menu" aria-label="Szekciók"><ol><li><a href="/index.html#kalkulator"><b>01</b><span>Árkalkulátor</span></a></li><li><a href="/index.html#miert"><b>02</b><span>Miért éri meg?</span></a></li><li><a href="/index.html#igeret"><b>03</b><span>Az ígéretünk</span></a></li><li><a href="/index.html#referenciak"><b>04</b><span>Referenciák</span></a></li><li><a href="/index.html#gyik"><b>05</b><span>Gyakori kérdések</span></a></li><li><a href="/index.html#kapcsolat"><b>06</b><span>Ajánlatkérés</span></a></li></ol></nav>
   </header>
 </div></div>
 <div class="wrap">
@@ -958,7 +988,7 @@ html.noscroll { overflow: hidden; }
   if (calc) {
     var size = document.getElementById('csize'), fmt = function (n) { return n.toLocaleString('hu-HU').replace(/\u00a0/g, ' '); };
     var render = function () {
-      var m2 = parseInt(size.value, 10), unit = 499000, tname = 'Acélszerkezetes ház';
+      var m2 = parseInt(size.value, 10), unit = 510000, tname = 'Acélszerkezetes ház';
       document.getElementById('csize-out').textContent = m2 + ' m²';
       document.getElementById('cprice').textContent = fmt(m2 * unit) + ' Ft';
       document.getElementById('cdetail').textContent = m2 + ' m² × ' + fmt(unit) + ' Ft';

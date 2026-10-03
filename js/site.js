@@ -149,7 +149,7 @@
   if (calc) {
     var size = document.getElementById('csize'), fmt = function (n) { return n.toLocaleString('hu-HU').replace(/\u00a0/g, ' '); };
     var render = function () {
-      var m2 = parseInt(size.value, 10), unit = 499000, tname = 'Acélszerkezetes ház';
+      var m2 = parseInt(size.value, 10), unit = 510000, tname = 'Acélszerkezetes ház';
       document.getElementById('csize-out').textContent = m2 + ' m²';
       document.getElementById('cprice').textContent = fmt(m2 * unit) + ' Ft';
       document.getElementById('cdetail').textContent = m2 + ' m² × ' + fmt(unit) + ' Ft';
