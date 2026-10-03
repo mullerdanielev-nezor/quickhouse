@@ -175,8 +175,9 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-scroll]'), function (row) {
     var sc = row.querySelector('.refscroll, .pscroll'), cards = Array.prototype.slice.call(sc.children);
     var step = function () { var f = cards[0]; return (f ? f.getBoundingClientRect().width : 300) + 14; };
-    row.querySelector('[data-sprev]').addEventListener('click', function () { sc.scrollBy({ left: -step(), behavior: 'smooth' }); });
-    row.querySelector('[data-snext]').addEventListener('click', function () {
+    var bp = row.querySelector('[data-sprev]'), bn = row.querySelector('[data-snext]');
+    if (bp) bp.addEventListener('click', function () { sc.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    if (bn) bn.addEventListener('click', function () {
       var end = sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 4;
       if (end) sc.scrollTo({ left: 0, behavior: 'smooth' }); else sc.scrollBy({ left: step(), behavior: 'smooth' });
     });

@@ -809,6 +809,13 @@ section > .head h2 { text-decoration: underline; text-decoration-color: var(--pe
 .mcta .btn { padding: 12px 28px; min-height: 0; font-size: .98rem; }
 @media (max-width: 860px) { .mcta .btn { width: 100%; max-width: 340px; } }
 
+/* ígéretek: nyilak nélkül, asztali gépen mind a három egymás mellett */
+@media (min-width: 861px) { .promo .pc { flex: 0 0 calc((100% - 32px) / 3); max-width: none; } }
+
+/* referenciák alsó sor: közepesen gyors, folyamatos mozgás */
+.mq-track { animation-duration: 30s; }
+@media (max-width: 860px) { .mq-track { animation-duration: 24s; } }
+
 </style>
 
 </head>
@@ -1034,8 +1041,9 @@ section > .head h2 { text-decoration: underline; text-decoration-color: var(--pe
   Array.prototype.forEach.call(document.querySelectorAll('[data-scroll]'), function (row) {
     var sc = row.querySelector('.refscroll, .pscroll'), cards = Array.prototype.slice.call(sc.children);
     var step = function () { var f = cards[0]; return (f ? f.getBoundingClientRect().width : 300) + 14; };
-    row.querySelector('[data-sprev]').addEventListener('click', function () { sc.scrollBy({ left: -step(), behavior: 'smooth' }); });
-    row.querySelector('[data-snext]').addEventListener('click', function () {
+    var bp = row.querySelector('[data-sprev]'), bn = row.querySelector('[data-snext]');
+    if (bp) bp.addEventListener('click', function () { sc.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    if (bn) bn.addEventListener('click', function () {
       var end = sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 4;
       if (end) sc.scrollTo({ left: 0, behavior: 'smooth' }); else sc.scrollBy({ left: step(), behavior: 'smooth' });
     });

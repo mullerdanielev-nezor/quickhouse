@@ -787,3 +787,10 @@ section > .head h2 { text-decoration: underline; text-decoration-color: var(--pe
 .mcta { all: unset; display: block; text-align: center; margin-top: 28px; }
 .mcta .btn { padding: 12px 28px; min-height: 0; font-size: .98rem; }
 @media (max-width: 860px) { .mcta .btn { width: 100%; max-width: 340px; } }
+
+/* ígéretek: nyilak nélkül, asztali gépen mind a három egymás mellett */
+@media (min-width: 861px) { .promo .pc { flex: 0 0 calc((100% - 32px) / 3); max-width: none; } }
+
+/* referenciák alsó sor: közepesen gyors, folyamatos mozgás */
+.mq-track { animation-duration: 30s; }
+@media (max-width: 860px) { .mq-track { animation-duration: 24s; } }
