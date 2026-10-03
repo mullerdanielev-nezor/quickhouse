@@ -180,7 +180,7 @@
       var end = sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 4;
       if (end) sc.scrollTo({ left: 0, behavior: 'smooth' }); else sc.scrollBy({ left: step(), behavior: 'smooth' });
     });
-    var chk = function () { row.classList.toggle('static', sc.scrollWidth <= sc.clientWidth + 4); };
+    var chk = function () { row.classList.toggle('static', !row.classList.contains('promo') && sc.scrollWidth <= sc.clientWidth + 4); };
     chk(); window.addEventListener('resize', chk);
     var dots = row.nextElementSibling && row.nextElementSibling.classList.contains('pdots') ? row.nextElementSibling : null;
     if (dots) {
