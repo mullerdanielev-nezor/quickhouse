@@ -884,3 +884,7 @@ html.qhpl-lock { overflow: hidden; }
 .qhpl.out .l1 b { animation: qhdown .5s cubic-bezier(.7, 0, .3, 1) both; animation-delay: calc(.18s + var(--i) * .05s); }
 @keyframes qhdown { to { transform: translateY(101%); } }
 @keyframes qhmo { to { opacity: 0; transform: scale(.9) translateY(26px); } }
+
+/* köszönő oldal: egyszerű, középre igazított */
+.ty.simple { min-height: 58vh; display: flex; align-items: center; justify-content: center; padding-block: 40px; }
+.ty.simple .ty-hero .btn { margin-top: 10px; }

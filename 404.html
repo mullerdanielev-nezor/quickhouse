@@ -887,6 +887,29 @@ footer.ft::before { content: ""; position: absolute; top: 0; left: 0; right: 0; 
   .ty-h { margin-top: 42px; }
 }
 
+/* ===== preloader: kétrétegű redőny (barack + barna), lefelé nyílik, gyors ===== */
+.qhpl { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.qhpl-skip .qhpl, .qhpl.gone { display: none; }
+html.qhpl-lock { overflow: hidden; }
+.qhl { position: absolute; inset: 0; display: flex; }
+.qhl b { flex: 1; display: block; will-change: transform; }
+.qhl.l1 b { background: #FEBE98; }
+.qhl.l2 b { background: #915856; }
+.qhm { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #fff; }
+.qhmark { width: 88px; height: 88px; object-fit: contain; filter: brightness(0) invert(1); animation: qhpop .45s cubic-bezier(.3, 1.7, .5, 1) both; }
+.qhword { font-weight: 900; font-size: clamp(2rem, 11vw, 3rem); letter-spacing: -.02em; line-height: 1; animation: qhw .4s ease .12s both; }
+@keyframes qhpop { from { transform: scale(0) rotate(-20deg); } to { transform: none; } }
+@keyframes qhw { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+.qhpl.out .qhm { animation: qhmo .25s ease forwards; }
+.qhpl.out .l2 b { animation: qhdown .5s cubic-bezier(.7, 0, .3, 1) both; animation-delay: calc(var(--i) * .05s); }
+.qhpl.out .l1 b { animation: qhdown .5s cubic-bezier(.7, 0, .3, 1) both; animation-delay: calc(.18s + var(--i) * .05s); }
+@keyframes qhdown { to { transform: translateY(101%); } }
+@keyframes qhmo { to { opacity: 0; transform: scale(.9) translateY(26px); } }
+
+/* köszönő oldal: egyszerű, középre igazított */
+.ty.simple { min-height: 58vh; display: flex; align-items: center; justify-content: center; padding-block: 40px; }
+.ty.simple .ty-hero .btn { margin-top: 10px; }
+
 </style>
 
 </head>
@@ -941,6 +964,24 @@ footer.ft::before { content: ""; position: absolute; top: 0; left: 0; right: 0; 
 /* Quickhouse – menü, galéria (lightbox) és süti-hozzájárulás kezelése. Külső függőség nincs. */
 (function () {
   'use strict';
+
+
+  /* ---------- preloader: gyors, egyszer munkamenetenként ---------- */
+  (function () {
+    var pl = document.querySelector('.qhpl'), root = document.documentElement;
+    if (!pl || root.classList.contains('qhpl-skip')) return;
+    root.classList.add('qhpl-lock');
+    var t0 = Date.now(), MIN = 750, done = false;
+    function finish() {
+      if (done) return; done = true;
+      pl.classList.add('out');
+      try { sessionStorage.setItem('qh_pl', '1'); } catch (e) {}
+      setTimeout(function () { pl.classList.add('gone'); root.classList.remove('qhpl-lock'); }, 950);
+    }
+    function ready() { setTimeout(finish, Math.max(0, MIN - (Date.now() - t0))); }
+    if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
+    setTimeout(finish, 3500); /* biztonsági tartalék */
+  })();
 
   /* ---------- ragadós fejléc: árnyék görgetéskor ---------- */
   var bar = document.getElementById('topbar');
