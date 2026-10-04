@@ -2,6 +2,24 @@
 (function () {
   'use strict';
 
+
+  /* ---------- preloader: gyors, egyszer munkamenetenként ---------- */
+  (function () {
+    var pl = document.querySelector('.qhpl'), root = document.documentElement;
+    if (!pl || root.classList.contains('qhpl-skip')) return;
+    root.classList.add('qhpl-lock');
+    var t0 = Date.now(), MIN = 750, done = false;
+    function finish() {
+      if (done) return; done = true;
+      pl.classList.add('out');
+      try { sessionStorage.setItem('qh_pl', '1'); } catch (e) {}
+      setTimeout(function () { pl.classList.add('gone'); root.classList.remove('qhpl-lock'); }, 950);
+    }
+    function ready() { setTimeout(finish, Math.max(0, MIN - (Date.now() - t0))); }
+    if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
+    setTimeout(finish, 3500); /* biztonsági tartalék */
+  })();
+
   /* ---------- ragadós fejléc: árnyék görgetéskor ---------- */
   var bar = document.getElementById('topbar');
   if (bar) {
