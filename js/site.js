@@ -113,13 +113,12 @@
   /* ---------- ajánlatkérő űrlap ---------- */
   var form = document.getElementById('quote');
   if (form) {
-    var box = document.getElementById('fmsg'), tsf = document.getElementById('ts'), btn = form.querySelector('button[type=submit]');
-    tsf.value = Date.now();
+    var box = document.getElementById('fmsg'), btn = form.querySelector('button[type=submit]');
     var say = function (t, err) { box.textContent = t; box.className = 'msg-box show' + (err ? ' err' : ''); box.scrollIntoView({ block: 'nearest' }); };
     if (/[?&]kuldes=ok/.test(location.search)) say('Köszönjük, megkaptuk az ajánlatkérését. Hamarosan jelentkezünk.', false);
     if (/[?&]kuldes=hiba/.test(location.search)) say('A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.', true);
     form.addEventListener('submit', function (e) {
-      var name = form.elements.name, phone = form.elements.phone, mail = form.elements.email, msg = form.elements.msg, consent = form.elements.consent, bad = null;
+      var name = document.getElementById('name'), phone = document.getElementById('phone'), mail = document.getElementById('email'), msg = document.getElementById('msg'), consent = document.getElementById('consent'), bad = null;
       [name, phone, mail, msg].forEach(function (f) { f.classList.remove('invalid'); });
       if (!name.value.trim()) { name.classList.add('invalid'); bad = bad || name; }
       if (!phone.value.trim()) { phone.classList.add('invalid'); bad = bad || phone; }
@@ -130,13 +129,19 @@
       if (!window.fetch || !window.FormData) return; /* régi böngésző: hagyományos beküldés */
       e.preventDefault();
       btn.disabled = true; btn.textContent = 'Küldés…';
-      fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
-        .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
-        .then(function (d) {
-          if (d.ok || d.success === true || d.success === 'true') { if (window.fbq) fbq('track', 'Lead'); form.reset(); tsf.value = Date.now(); say('Köszönjük, megkaptuk az ajánlatkérését. Hamarosan jelentkezünk.', false); }
-          else say('A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.', true);
+      var data = new FormData(form), okMsg = 'Köszönjük, megkaptuk az ajánlatkérését. Hamarosan jelentkezünk.', errMsg = 'A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.';
+      var done = function () { location.href = 'koszonjuk.html'; };
+      /* tartalék: ha a FormSubmit AJAX-végpontja szerverhibát ad, a hagyományos végpontra küldünk (a válasz nem olvasható, a kérés elmegy) */
+      var fallback = function () { return fetch(form.action, { method: 'POST', body: data, mode: 'no-cors' }).then(done); };
+      fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+        .then(function (r) {
+          if (r.status >= 500) return fallback();
+          return r.json().then(function (d) {
+            if (d.success === true || d.success === 'true') done();
+            else say(errMsg, true); /* pl. az űrlap még nincs aktiválva: nem mutatunk hamis sikert */
+          });
         })
-        .catch(function () { say('A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.', true); })
+        .catch(function () { return fallback().catch(function () { say(errMsg, true); }); })
         .then(function () { btn.disabled = false; btn.textContent = 'Ajánlatot kérek'; });
     });
   }
@@ -160,10 +165,10 @@
   /* ---------- az űrlap előtöltése a kalkulátorból ---------- */
   (function () {
     var f = document.getElementById('quote'); if (!f) return;
-    if (f.elements.msg) f.elements.msg.addEventListener('input', function () { this.dataset.auto = ''; });
+    var fm = document.getElementById('msg'); if (fm) fm.addEventListener('input', function () { this.dataset.auto = ''; });
     var q = {}; location.search.replace(/[?&]([^=&]+)=([^&]*)/g, function (_, k, v) { q[k] = decodeURIComponent(v.replace(/\+/g, ' ')); });
     if (q.tipus && q.meret && /^\d{2,3}$/.test(q.meret)) {
-      var m = f.elements.msg;
+      var m = document.getElementById('msg');
       if (m && !m.value) m.value = 'Érdekel: ' + q.tipus + ', kb. ' + q.meret + ' m². Kérem az erre vonatkozó pontos ajánlatot.';
     }
   })();
@@ -303,6 +308,7 @@
       t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', PIXEL_ID); fbq('track', 'PageView');
+    if (document.querySelector('[data-lead]')) fbq('track', 'Lead');
   }
   function pixelCheck() { var c = window.qhConsent.current; if (c && c.marketing) loadPixel(); }
   document.addEventListener('qh:consent', pixelCheck);
