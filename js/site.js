@@ -148,7 +148,7 @@
       e.preventDefault();
       btn.disabled = true; btn.textContent = 'Küldés…';
       var data = new FormData(form), okMsg = 'Köszönjük, megkaptuk az ajánlatkérését. Hamarosan jelentkezünk.', errMsg = 'A küldés most nem sikerült. Kérjük, hívjon minket telefonon, vagy írjon az info@quickhouse.hu címre.';
-      var done = function () { location.href = 'koszonjuk.html'; };
+      var done = function () { try { sessionStorage.setItem('qh_lead', String(Date.now())); } catch (e) {} location.href = 'koszonjuk.html'; };
       /* tartalék: ha a FormSubmit AJAX-végpontja szerverhibát ad, a hagyományos végpontra küldünk (a válasz nem olvasható, a kérés elmegy) */
       var fallback = function () { return fetch(form.action, { method: 'POST', body: data, mode: 'no-cors' }).then(done); };
       fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
@@ -326,7 +326,8 @@
       t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', PIXEL_ID); fbq('track', 'PageView');
-    if (document.querySelector('[data-lead]')) fbq('track', 'Lead');
+    /* Lead: csak a beküldés után, és csak egyszer (frissítés vagy újranyitás nem számít újra) */
+    try { if (document.querySelector('[data-lead]') && sessionStorage.getItem('qh_lead')) { sessionStorage.removeItem('qh_lead'); fbq('track', 'Lead'); } } catch (e) {}
   }
   function pixelCheck() { var c = window.qhConsent.current; if (c && c.marketing) loadPixel(); }
   document.addEventListener('qh:consent', pixelCheck);
